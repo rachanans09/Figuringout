@@ -1,0 +1,21 @@
+name: My First Windows Local Pipeline
+
+# This tells GitHub to run the pipeline every time you push code
+on: [push]
+
+jobs:
+  run-on-my-pc:
+    # This forces GitHub to send the job to your green-dotted local machine
+    runs-on: self-hosted  
+
+    steps:
+      - name: Step 1 - Pull Code from GitHub
+        uses: actions/checkout@v4
+
+      - name: Step 2 - Run a Test Command on Windows
+        shell: powershell
+        run: |
+          Write-Host "====================================="
+          Write-Host " Hello from your own Windows machine! "
+          Write-Host "====================================="
+          Get-Service -Name "ActionsRunner*" | Select-Object Status, DisplayName
